@@ -19,6 +19,8 @@ int main(void)
         printf("%s", "Enter limit: ");
         scanf("%i", &limit);
 
+        printf("Guess the number between %i and %i", start, limit);
+
         int random = get_random(start, limit);
 
         while (num != random) {
