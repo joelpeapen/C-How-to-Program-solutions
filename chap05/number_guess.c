@@ -1,4 +1,5 @@
 // number guessing game
+#include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h> // for rand()
 #include <time.h> // for time()
@@ -9,42 +10,38 @@ int main(void)
 {
     srand(time(NULL)); // get random seeds for rand
 
-    int flag = 1, guess = 0, start = 0, limit = 0, random = 0;
+    int guesses = 1, start = 0, limit = 0, random = 0, num = 0;
+    int again = 0;
 
-    do {
-
-        printf("%s", "Enter start: "); // get range
+    while (true) {
+        printf("%s", "Enter start: ");
         scanf("%i", &start);
-        printf("%s", "Enter limit:");
+        printf("%s", "Enter limit: ");
         scanf("%i", &limit);
 
-        random = get_random(start, limit); // get random int
-        printf("I have a number between %i and %i\n", start, limit);
-        printf("%s", "Guess the number: ");
-        scanf("%i", &guess);
-        // if !correct ask
-        if (guess != random) // need if because do while always runs once
-        {
-            do {
-                if (guess > random)
-                    printf("Too high. ");
-                else if (guess < random)
-                    printf("Too low. ");
+        int random = get_random(start, limit);
 
-                printf("%s", "Try again : ");
-                scanf("%i", &guess);
-            } while (guess != random);
+        while (num != random) {
+            printf("%s (Guess %i): ", "Guess the number", guesses);
+            scanf("%i", &num);
+            if (num > random) {
+                puts("Too high. Try again");
+                guesses++;
+            } else if (num < random) {
+                puts("Too low. Try again");
+                guesses++;
+            }
         }
 
-        if (guess == random)
-            puts("CORRECT!");
+        if (num == random)
+            puts("\nCorrect!");
 
-        printf("%s", "\nPlay again? (0 to quit): ");
-        scanf("%i", &flag);
+        printf("\nPlay again? [0/1]: ");
+        scanf("%i", &again);
 
-    } while (flag != 0);
-
-    return 0;
+        if (again != 0)
+            exit(0);
+    }
 }
 
 int get_random(int start, int limit)
