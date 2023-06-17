@@ -6,8 +6,7 @@ void circle_circum(float radius);
 void circle_area(float radius);
 void sphere_volume(float radius);
 
-int main(void)
-{
+int main(void) {
     void (*calculate[3])(float radius) = { circle_circum, circle_area, sphere_volume };
     int choice = 0;
     float radius = 0;
@@ -36,16 +35,13 @@ int main(void)
     return 0;
 }
 
-void circle_circum(float radius)
-{
+void circle_circum(float radius) {
     printf("\nCircumference: %f\n", 2 * PI * radius);
 }
-void circle_area(float radius)
-{
+void circle_area(float radius) {
     printf("\nArea: %f\n", PI * radius * radius);
 }
-void sphere_volume(float radius)
-{
+void sphere_volume(float radius) {
     float volume = (float)(4 / 3) * PI * radius * radius * radius;
     printf("Volume: %f\n", volume);
 }

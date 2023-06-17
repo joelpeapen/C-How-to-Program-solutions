@@ -1,36 +1,38 @@
 #include <stdbool.h>
 #include <stdio.h>
+
 #define SIZE 20
 
 bool inArray(int a[], int element, size_t size);
 
-int main(int argc, char const* argv[])
-{
+int main() {
     // accept 20 ints in 10-100
     int array[20] = { 0 };
+
+    printf("Enter %i numbers between 10 & 100: ", SIZE);
     for (size_t i = 0; i < SIZE; i++) {
-        printf("%s", "Enter number between 10 & 100: ");
+        printf("%s", "? ");
         scanf("%i", &array[i]);
 
         if (!inArray(array, array[i], SIZE)) // if not duplicate print
             printf("%i\n", array[i]);
     }
 
+    puts("\nArray: ");
     for (size_t i = 0; i < SIZE; i++) {
-        printf("array[%zu]: %i\n", i, array[i]);
+        printf("%i ", array[i]);
     }
 
     return 0;
 }
 
-bool inArray(int a[], int element, size_t size)
-{
+bool inArray(int a[], int element, size_t size) {
     int total = 0;
     for (size_t i = 0; i < SIZE; i++) {
         if (a[i] == element)
-            total++;
+            total++; // count duplicates
 
-        if (total > 1) // if more than one of same value
+        if (total > 1) // if duplicate
             return true;
     }
     return false;

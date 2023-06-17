@@ -1,3 +1,4 @@
+// taken from some repo
 #include <stdbool.h>
 #include <stdio.h>
 
@@ -11,20 +12,16 @@ void available_chairs(int class);
 
 int airplane[10] = { 0 };
 
-int main(void)
-{ /***********/
+int main(void) {
+    int desired_class = 0, other_class = 0, desired_chair = 0, answer = 0;
 
-    int desired_class;
-    int other_class;
-    int desired_chair;
-    int answer;
+    /* 1 because we have to
+       comunicate the 11th, 12th,
+       13th and so on customer
+       that there are no more
+       chairs */
 
-    while (true) { /* 1 because we have to
-                   comunicate the 11th, 12th,
-                   13th and so on customer
-                   that there are no more
-                   chairs */
-
+    while (true) {
         desired_class = ask_for_desired_class();
         other_class = (desired_class == 1) ? 2 : 1;
 
@@ -43,10 +40,10 @@ int main(void)
             printf("Enter 1 (yes) or 0 (no): ");
 
             /* get the answer */
-            scanf("%d", &answer);
+            scanf("%i", &answer);
             while (answer != 0 && answer != 1) {
                 printf("Enter 1 (yes) or 0 (no): ");
-                scanf("%d", &answer);
+                scanf("%i", &answer);
             }
 
             /* If the answer is yes, book in the other class */
@@ -54,23 +51,20 @@ int main(void)
                 booking_procedure(other_class);
             }
 
-            /* otherwise give the next flight communication */
             else if (answer == 0)
                 printf("Next flight leaves in 3 hours\n");
         }
-        /* If the flight is completely booked (no overbooking) ... */
         else {
             printf("\n\nFlight is completely booked\n");
             printf("Next flight leaves in 3 hours\n");
         }
 
-    } /* end of the first while */
+    }
 
     return 0;
 }
 
-int ask_for_desired_class(void)
-{ /****************************/
+int ask_for_desired_class(void) {
     int desired_class;
     int first_full = 0;
     int economy_full = 0;
@@ -94,19 +88,18 @@ int ask_for_desired_class(void)
         printf("Next flight leaves in 3 hours\n");
     }
 
-    scanf("%d", &desired_class);
+    scanf("%i", &desired_class);
 
     while ((desired_class != 2) && (desired_class != 1)) {
         printf("Please type 1 for \"first class\"\n");
         printf("Please type 2 for \"economy\"\n");
-        scanf("%d", &desired_class);
+        scanf("%i", &desired_class);
     }
 
     return desired_class;
 }
 
-int not_full(int class)
-{ /********************/
+int not_full(int class) {
 
     /* since airplane vector can't be ordered, a linear search is needed */
 
@@ -120,17 +113,16 @@ int not_full(int class)
         end = 9;
     }
 
-    for (i = start; i <= end; i++)
-        if (airplane[i] == 0)
+    for (i = start; i <= end; i++) {
+        if (airplane[i] == 0) {
             return 1;
-
-    /* otherwise */
+        }
+    }
 
     return 0;
 }
 
-void booking_procedure(int class)
-{ /******************************/
+void booking_procedure(int class) {
 
     int desired_chair;
 
@@ -139,7 +131,7 @@ void booking_procedure(int class)
         available_chairs(class);
 
         printf("Enter # of desired chair: ");
-        scanf("%d", &desired_chair);
+        scanf("%i", &desired_chair);
     }
 
     while (wrong_chair_insertion(class, desired_chair));
@@ -148,8 +140,7 @@ void booking_procedure(int class)
     print_reservation(desired_chair, class);
 }
 
-void available_chairs(int class)
-{ /******************************/
+void available_chairs(int class) {
     int i, start, end;
 
     if (class == 1) {
@@ -167,8 +158,7 @@ void available_chairs(int class)
     printf("\n");
 }
 
-int wrong_chair_insertion(int class, int chair)
-{ /********************************************/
+int wrong_chair_insertion(int class, int chair) {
 
     if (class == 1)
         if ((chair <= 0) || (chair >= 6)) {
@@ -191,8 +181,7 @@ int wrong_chair_insertion(int class, int chair)
     return 0;
 }
 
-void print_reservation(int chair, int class)
-{ /******************************/
+void print_reservation(int chair, int class) {
 
     printf("\n\n|==============|\n");
     printf("| Foo Airlines |\n");
@@ -202,11 +191,8 @@ void print_reservation(int chair, int class)
     printf("|==============|\n\n\n");
 }
 
-void book_it(int chair)
-{ /********************/
-
+void book_it(int chair) {
     /* it books chair specified as argument; chair must be in
      * normal numeric notation (not vector one) */
-
     airplane[chair - 1] = 1;
 }

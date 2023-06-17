@@ -1,7 +1,6 @@
 #include <stdio.h>
 
-int main(void)
-{
+int main(void) {
     int x = 0;
     puts("enter 5-digit number: ");
     scanf("%d", &x);

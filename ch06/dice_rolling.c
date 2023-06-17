@@ -3,8 +3,7 @@
 #include <stdlib.h>
 #include <time.h>
 
-int main(int argc, char const* argv[])
-{
+int main() {
     srand(time(NULL));
     int sum[12] = { 0 };
 

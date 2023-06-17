@@ -1,8 +1,8 @@
 #include <stdio.h>
+
 #define SIZE 9
 
-int main(int argc, char const* argv[])
-{
+int main() {
     int numSales = 0;
     printf("%s", "Enter number of sales people: ");
     scanf("%i", &numSales);
@@ -28,13 +28,13 @@ int main(int argc, char const* argv[])
 
     // get frequency
     for (size_t i = 0; i < numSales; i++) {
-        int salary = (salaries[i] / 100) - 2;
+        int salary = (salaries[i] / 100) - 2; // get 100th's place
         // check if salary is not out of array bounds
         (salary > SIZE - 1) ? ++frequency[SIZE - 1] : ++frequency[salary];
     }
 
     // output
-    printf("\n%s\t%14s\n", " Range", "Frequency");
+    printf("\n\n%s\t%14s\n", " Range", "Frequency");
     for (size_t i = 0, range = 200; i < SIZE; i++) {
         if (i == SIZE - 1) { // for last range 1000+
             printf("1000+  %14i\n", frequency[i]);
